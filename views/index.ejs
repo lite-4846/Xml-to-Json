@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html {
+        background-color: #ffd6ff;
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        text-align: center;
+      }
+
+      body {
+        max-width: 40%;
+        margin: auto;
+      }
+
+      #header {
+        margin-top: 3rem;
+        font-size: 2rem;
+        font-family: monospace;
+      }
+
+      main {
+        background-color: #ced4da;
+        padding: 2rem;
+        border-radius: 6px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        font-size: 1rem;
+      }
+
+      div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      button {
+        padding: 0.5rem 1rem;
+        background-color: bisque;
+        border-radius: 6px;
+        margin-right: auto;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="header">XML to Json converter</h1>
+    <main>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <div>
+          <label for="Xml">Add XML File : </label>
+          <input type="file" name="Xmlfile" id="Xml" />
+        </div>
+        <button type="submit">submit</button>
+      </form>
+    </main>
+  </body>
+</html>
