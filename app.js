@@ -25,7 +25,6 @@ app.post("/upload", upload.single('Xmlfile'), async (req, res) => {
   let fileName = './uploads/' + req.file.filename;
   let xmlData = fs.readFileSync(fileName, 'utf-8');
 
-  console.log(xmlData);
   parser.parseString(xmlData, function (err, result) {
     if(!err) {
       fs.writeFileSync("./public/Output.json", JSON.stringify(result));
