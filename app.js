@@ -14,6 +14,9 @@ app.set('view engine', 'ejs');
 const fs = require("fs");
 const xml2js = require("xml2js");
 
+fs.mkdir(path.join(__dirname, 'uploads'), () => {});
+fs.mkdir(path.join(__dirname, 'public'), () => {});
+
 const parser = new xml2js.Parser();
 
 app.get("/", (req, res) => {
