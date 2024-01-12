@@ -9,7 +9,6 @@
         background-color: #ffd6ff;
         box-sizing: border-box;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        text-align: center;
       }
 
       body {
@@ -17,49 +16,96 @@
         margin: auto;
       }
 
-      #header {
-        margin-top: 3rem;
+      h1 {
         font-size: 2rem;
         font-family: monospace;
+        margin: 0;
       }
 
       main {
         background-color: #ced4da;
         padding: 2rem;
-        border-radius: 6px;
+        border-radius: 10px;
+        margin-top: 4rem;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
       }
 
       form {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
         font-size: 1rem;
+        margin-bottom: 2rem;
+        border: 0.5px dotted black;
+        padding: 1rem;  
       }
 
       div {
+        margin: 1.5rem 0;
         display: flex;
         justify-content: space-between;
       }
 
       button {
         padding: 0.5rem 1rem;
-        background-color: bisque;
+        background-color: rgb(39, 39, 46);
         border-radius: 6px;
-        margin-right: auto;
-        
+        font-size: 1rem;
+        color: white;
+        transition: 200ms ease-in-out all;
+      }
+
+      button:hover {
+        background-color: #f9f9f9;
+        color: black;
+        cursor: pointer;
+      }
+
+      .custom-file-input::-webkit-file-upload-button {
+        visibility: hidden;
+      }
+
+      .custom-file-input {
+        content: 'Select some files';
+        display: inline-block;
+        background: linear-gradient(top, #f9f9f9, #e3e3e3);
+        border: 1px solid #999;
+        border-radius: 3px;
+        padding: 5px 8px;
+        outline: none;
+        white-space: nowrap;
+        cursor: pointer;
+        text-shadow: 1px 1px #fff;
+        font-weight: 700;
+        font-size: 10pt;
+      }
+      .custom-file-input:hover{
+        border-color: black;
+      }
+      .custom-file-input:active {
+        background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
       }
     </style>
   </head>
   <body>
-    <h1 id="header">XML to Json converter</h1>
     <main>
       <form action="/upload" method="post" enctype="multipart/form-data">
+        <h1 id="header">XML to Json converter</h1>
+        <input type="checkbox" name="check" id="" value="xml" checked hidden>
         <div>
           <label for="Xml">Add XML File : </label>
-          <input type="file" name="Xmlfile" id="Xml" />
+          <input class="custom-file-input" type="file" name="files" id="Xml" />
         </div>
-        <button type="submit">submit</button>
+        <button type="submit">Submit</button>
       </form>
+
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <h1>Excel to CSV converter</h1>
+        <input type="checkbox" name="check" id="" value="xls" checked hidden>
+        <div>
+          <label for="xls">Add Excel File : </label>
+          <input class="custom-file-input" type="file" name="files" id="xls" />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+
     </main>
   </body>
 </html>

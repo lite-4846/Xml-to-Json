@@ -1,12 +1,9 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
 const multer = require("multer")
 const upload = multer({ dest: "uploads/" });
 const path = require('path');
-
-app.use(bodyParser.json());
-bodyParser.urlencoded({extended: true})
+const AutoSheet = require('auto-sheet')
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); 
@@ -23,16 +20,39 @@ app.get("/", (req, res) => {
   res.render('index');
 });
 
-app.post("/upload", upload.single('Xmlfile'), async (req, res) => {
+app.post('/uploadxls', upload.single('xls'), (req, res) => {
 
   let fileName = './uploads/' + req.file.filename;
-  let xmlData = fs.readFileSync(fileName, 'utf-8');
+  
+  
+  AutoSheet.run({
+    fromFile: fileName,
+    toFile: './public/Output.csv'
+  })
 
-  parser.parseString(xmlData, function (err, result) {
-    if(!err) {
-      fs.writeFileSync("./public/Output.json", JSON.stringify(result));
-    }
-  });
+  fs.rm(fileName, () => {})
+
+  res.render('downloadxl');
+
+})
+
+app.post("/upload", upload.array('files', 2), async (req, res) => {
+
+  let fileName = './uploads/' + req.files[0].filename;
+  if(req.body.check === 'xml') {
+    let xmlData = fs.readFileSync(fileName, 'utf-8');
+    parser.parseString(xmlData, function (err, result) {
+      if(!err) {
+        fs.writeFileSync("./public/Output.json", JSON.stringify(result));
+      }
+    });
+  }
+  else {
+    AutoSheet.run({
+      fromFile: fileName,
+      toFile: './public/Output.csv'
+    })
+  }
 
   fs.rm(fileName, () => {});
 
@@ -40,9 +60,10 @@ app.post("/upload", upload.single('Xmlfile'), async (req, res) => {
 });
 
 app.get('/download', (req, res) => {
-  let filePath = path.join(__dirname + '/public/Output.json');
-  res.download(filePath, () => {
-    fs.rm('./public/Output.json', () => {});
+
+  let fPath = fs.readdirSync(__dirname + '/public');
+  res.download(path.join(__dirname + '/public/', fPath[0]), () => {
+    fs.rm(`./public/${fPath[0]}`, () => {})
   });
 })
 

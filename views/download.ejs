@@ -5,51 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download</title>
     <style>
-        html {
-          background-color: #ffd6ff;
-          box-sizing: border-box;
-          font-family: Verdana, Geneva, Tahoma, sans-serif;
-          text-align: center;
-        }
-  
-        body {
-          max-width: 40%;
-          margin: auto;
-        }
-  
-        #header {
-          margin-top: 3rem;
-          font-size: 2rem;
-          font-family: monospace;
-        }
-  
-        main {
-          background-color: #ced4da;
-          padding: 2rem;
-          border-radius: 6px;
-        }
-  
-        form {
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
-          font-size: 1rem;
-          width: 30%;
-          margin: auto;
-        }
-  
-        div {
-          display: flex;
-          justify-content: space-between;
-        }
-  
-        button {
-          padding: 0.5rem 1rem;
-          background-color: bisque;
-          border-radius: 6px;
-          font-family: monospace;
-        }
-      </style>
+      html {
+        background-color: #ffd6ff;
+        box-sizing: border-box;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      body {
+        max-width: 40%;
+        margin: 4rem auto;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-family: monospace;
+        margin: 0;
+      }
+
+      main {
+        background-color: #ced4da;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-top: 4rem;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.5);
+      }
+      
+      button {
+        padding: 0.5rem 1rem;
+        background-color: rgb(39, 39, 46);
+        border-radius: 6px;
+        font-size: 1rem;
+        color: white;
+        transition: 200ms ease-in-out all;
+      }
+
+      button:hover {
+        background-color: #f9f9f9;
+        color: black;
+        cursor: pointer;
+      }
+
+    </style>
 </head>
 <body>
     <h2 id="header">Your file is Ready to Download</h2>
