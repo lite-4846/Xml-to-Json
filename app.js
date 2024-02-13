@@ -3,6 +3,7 @@ const multer = require("multer");
 const path = require("path");
 const xml2json = require("./utils/xml2json");
 const XLSX = require("xlsx");
+const purifier = require('./utils/purifier');
 
 const app = express();
 
@@ -31,13 +32,26 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.post("/bushchat", upload.array("files", 1), (req, res) => {
+  let fileName = "./uploads/" + req.files[0].filename;
+
+  let jsonData = fs.readFileSync(fileName, "utf-8");
+  fs.writeFileSync("./public/output.json", JSON.stringify(purifier(jsonData)));
+
+  for (let file of req.files) {
+    fs.rm("./uploads/" + file.originalname, () => {});
+  }
+  res.render("download");
+});
+
 app.post("/upload", upload.array("files", 10), (req, res) => {
   let fileName = "./uploads/" + req.files[0].filename;
 
   if (req.body.check === "xml") {
     let xmlData = fs.readFileSync(fileName, "utf-8");
     fs.writeFileSync("./public/output.json", JSON.stringify(xml2json(xmlData)));
-  } else {
+  } 
+  else {
     let workbook = XLSX.readFile(fileName);
     let sheetsInExcel = workbook.Sheets;
     let data = "";
